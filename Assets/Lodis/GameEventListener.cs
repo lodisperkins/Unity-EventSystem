@@ -8,27 +8,28 @@ namespace Lodis
     public class GameEventListener:MonoBehaviour,IListener
     {
         [SerializeField]
-        UnityEvent actions;
+        private UnityEvent<object,object,object,object> _actions;
         [SerializeField]
-        Lodis.Event Event;
+        private Event _event;
         [SerializeField]
-        GameObject intendedSender;
+        private GameObject _intendedSender;
+
         // Use this for initialization
         void Start()
         {
-            Event.AddListener(this);
+            _event.AddListener(this);
         }
 
-        public void Invoke(Object Sender)
+        public void Invoke(Object Sender, object[] args)
         {
-            if(intendedSender == null)
+            if(_intendedSender == null)
             {
-                actions.Invoke();
+                _actions.Invoke(args[0], args[1], args[2], args[3]);
                 return;
             }
-            else if(intendedSender == Sender)
+            else if(_intendedSender == Sender)
             {
-                actions.Invoke();
+                _actions.Invoke(args[0], args[1], args[2], args[3]);
                 return;
             }
         }

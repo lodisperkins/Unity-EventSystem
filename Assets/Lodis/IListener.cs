@@ -5,6 +5,6 @@ namespace Lodis
 {
     public interface IListener
     {
-        void Invoke(Object Sender);
+        void Invoke(Object Sender, object[] args);
     }
 }
